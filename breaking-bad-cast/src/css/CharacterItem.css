@@ -1,0 +1,34 @@
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2em;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+}
+
+.card__img {
+  height: 343px;
+  width: 231px;
+}
+
+.card__name {
+  position: absolute;
+  z-index: 10;
+  font-size: x-large;
+  color: rgba(255, 255, 255, 0.5);
+  bottom: 30px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.card:hover {
+  box-shadow: 10px 5px 30px rgb(65, 65, 65);
+  transform: scale(1.05);
+}
+
+.card:hover .card__name {
+  color: #fff;
+}

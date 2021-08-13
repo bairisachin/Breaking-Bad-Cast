@@ -1,0 +1,18 @@
+/* .cards {
+  display: grid;
+  margin: auto;
+  margin-top: 1em;
+  background-color: bisque;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  max-width: 80vw;
+  gap: 2em;
+} */
+
+.cards {
+  display: flex;
+  overflow-x: hidden;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
