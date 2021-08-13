@@ -12,6 +12,8 @@
   outline: none;
   padding-left: 2em;
   border-radius: 1.5em;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .search:hover {

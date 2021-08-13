@@ -6,7 +6,7 @@ import Card from "./component/Card";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [loding, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
 
   //Fetching The data
@@ -26,8 +26,8 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <Card items={items} />
+      <Header getQuery={(q) => setQuery(q)} />
+      <Card items={items} loading={loading} />
     </div>
   );
 }
