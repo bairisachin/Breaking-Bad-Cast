@@ -9,6 +9,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
 
+  const [currentPage, setCurrentPage] = useState(1); //setting current page to 1st page (default)
+  const [cardsPerPage] = useState(10); //no.of cards per page
+
   //Fetching The data
   useEffect(() => {
     const fetchItems = async () => {
@@ -24,10 +27,25 @@ function App() {
     fetchItems();
   }, [query]);
 
+  //get current cards
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
+
+  // console.log(currentCards);
+
+  //to change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="app">
       <Header getQuery={(q) => setQuery(q)} />
-      <Card items={items} loading={loading} />
+      <Card
+        items={currentCards}
+        loading={loading}
+        totalCards={items.length}
+        paginate={paginate}
+      />
     </div>
   );
 }
