@@ -5,13 +5,14 @@ function Pagination({ cardPerPage, totalCards, paginate }) {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalCards / cardPerPage); i++) {
+    // 72 / 10 = 7
     pageNumbers.push(i);
   }
 
   return (
     <div>
       <ul className="pagination">
-        {pageNumbers.map((number) => (
+        {pageNumbers?.map((number) => (
           <li key={number} className="pagination__numbers">
             <a
               onClick={() => paginate(number)}

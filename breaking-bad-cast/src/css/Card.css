@@ -13,5 +13,6 @@ h2 {
 }
 
 .pagenumber {
-  background-color: #1b1b1b;
+  margin-top: 15px;
+  text-align: center;
 }

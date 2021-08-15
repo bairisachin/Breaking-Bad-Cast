@@ -1,5 +1,6 @@
 import "../css/Search.css";
 import { useState } from "react";
+import search from "../assets/search.png";
 
 function Search({ getQuery }) {
   const [text, setText] = useState("");
@@ -11,6 +12,7 @@ function Search({ getQuery }) {
 
   return (
     <div className="search">
+      <img className="search__icon" src={search} alt="search" />
       <input
         className="search__input"
         type="text"

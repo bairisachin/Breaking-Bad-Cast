@@ -3,6 +3,8 @@ import axios from "axios";
 import "./App.css";
 import Header from "./component/Header";
 import Card from "./component/Card";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CardInfo from "./component/CardInfo";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -28,24 +30,32 @@ function App() {
   }, [query]);
 
   //get current cards
+
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
 
-  // console.log(currentCards);
+  // console.log(items);
 
   //to change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="app">
-      <Header getQuery={(q) => setQuery(q)} />
-      <Card
-        items={currentCards}
-        loading={loading}
-        totalCards={items.length}
-        paginate={paginate}
-      />
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Header getQuery={(q) => setQuery(q)} />
+            <Card
+              items={currentCards}
+              loading={loading}
+              totalCards={items.length}
+              paginate={paginate}
+            />
+          </Route>
+          <Route path={`/:id`} component={CardInfo} />
+        </Switch>
+      </Router>
     </div>
   );
 }

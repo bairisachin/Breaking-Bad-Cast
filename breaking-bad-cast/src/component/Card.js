@@ -12,6 +12,7 @@ function Card({ items, loading, totalCards, paginate }) {
           <CharacterItem key={item.char_id} item={item} />
         ))}
       </div>
+
       <div className="pagenumber">
         <Pagination
           cardPerPage={items.length}
