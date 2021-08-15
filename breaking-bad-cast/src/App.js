@@ -5,14 +5,12 @@ import Header from "./component/Header";
 import Card from "./component/Card";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CardInfo from "./component/CardInfo";
+import Paginate from "react-paginate";
 
 function App() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
-
-  const [currentPage, setCurrentPage] = useState(1); //setting current page to 1st page (default)
-  const [cardsPerPage] = useState(10); //no.of cards per page
 
   //Fetching The data
   useEffect(() => {
@@ -29,16 +27,22 @@ function App() {
     fetchItems();
   }, [query]);
 
-  //get current cards
+  // get current cards
+  // const indexOfLastCard = currentPage * cardsPerPage;
+  // const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  // const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
+  // //to change page
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const indexOfLastCard = currentPage * cardsPerPage;
-  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
+  //Pagination
+  const [pageNumber, setPageNumber] = useState(0); //setting current page to 1st page (default)
+  const cardsPerPage = 10;
+  const pageVistied = pageNumber * cardsPerPage;
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
-  // console.log(items);
-
-  //to change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const pageCount = Math.ceil(items.length / cardsPerPage);
 
   return (
     <div className="app">
@@ -47,11 +51,22 @@ function App() {
           <Route path="/" exact>
             <Header getQuery={(q) => setQuery(q)} />
             <Card
-              items={currentCards}
+              items={items.slice(pageVistied, pageVistied + cardsPerPage)}
               loading={loading}
-              totalCards={items.length}
-              paginate={paginate}
             />
+            <div className="paginate">
+              <Paginate
+                previousLabel={"Previous"}
+                nextLabel={"Next"}
+                pageCount={pageCount}
+                onPageChange={changePage}
+                containerClassName={"pagination-btns"}
+                previousLinkClassName={"prev-btn"}
+                nextLinkClassName={"next-btn"}
+                disabledClassName={"paginationDisabled"}
+                activeClassName={"paginationActive"}
+              />
+            </div>
           </Route>
           <Route path={`/:id`} component={CardInfo} />
         </Switch>

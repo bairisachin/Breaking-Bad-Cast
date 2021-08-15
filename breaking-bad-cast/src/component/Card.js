@@ -1,8 +1,7 @@
 import "../css/Card.css";
 import CharacterItem from "./CharacterItem";
-import Pagination from "./Pagination";
 
-function Card({ items, loading, totalCards, paginate }) {
+function Card({ items, loading }) {
   return loading ? (
     <h2>Loading...</h2>
   ) : (
@@ -11,14 +10,6 @@ function Card({ items, loading, totalCards, paginate }) {
         {items?.map((item) => (
           <CharacterItem key={item.char_id} item={item} />
         ))}
-      </div>
-
-      <div className="pagenumber">
-        <Pagination
-          cardPerPage={items.length}
-          totalCards={totalCards}
-          paginate={paginate}
-        />
       </div>
     </div>
   );
